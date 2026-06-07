@@ -3,8 +3,6 @@ import { db } from '@/lib/db'
 import { recipes, tweaks } from '@/lib/schema'
 import { desc, count, eq } from 'drizzle-orm'
 
-export const dynamic = 'force-dynamic'
-
 export async function GET() {
   const [tierRows, categoryRows, mostTweakedRows, recentRows] = await Promise.all([
     db.select({ tier: recipes.tier, count: count() }).from(recipes).groupBy(recipes.tier),

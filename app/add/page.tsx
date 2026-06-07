@@ -1,8 +1,10 @@
 'use client'
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { CldUploadWidget } from 'next-cloudinary'
+import dynamic from 'next/dynamic'
 import { TierBadge, type Tier } from '@/components/tier-badge'
+
+const PhotoUpload = dynamic(() => import('@/components/photo-upload').then(m => m.PhotoUpload), { ssr: false })
 import { detectSourceType } from '@/lib/source-detection'
 
 const CATEGORIES = [
@@ -172,24 +174,11 @@ export default function AddRecipePage() {
         {/* Photo upload */}
         <div>
           <label style={S.label}>Photo</label>
-          <CldUploadWidget uploadPreset="recipe_vault"
-            onSuccess={result => {
-              if (result.info && typeof result.info === 'object' && 'secure_url' in result.info) {
-                setPhotoUrl(result.info.secure_url as string)
-              }
-            }}>
-            {({ open }) => (
-              <div>
-                <button type="button" onClick={() => open()} style={S.btnSecondary}>
-                  {photoUrl ? 'Change Photo' : 'Upload Photo'}
-                </button>
-                {photoUrl && (
-                  <img src={photoUrl} alt="Preview"
-                    style={{ display: 'block', marginTop: 8, borderRadius: 12, maxWidth: 300, width: '100%' }} />
-                )}
-              </div>
-            )}
-          </CldUploadWidget>
+          <PhotoUpload
+            photoUrl={photoUrl}
+            onUpload={setPhotoUrl}
+            btnStyle={S.btnSecondary}
+          />
         </div>
 
         {/* Parsed ingredients */}

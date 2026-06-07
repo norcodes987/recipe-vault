@@ -41,7 +41,7 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
 
       {recipe.photoUrl && (
         <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', borderRadius: 16, overflow: 'hidden', marginBottom: 32 }}>
-          <Image src={recipe.photoUrl} alt={recipe.title} fill style={{ objectFit: 'cover' }} sizes="800px" priority />
+          <Image src={recipe.photoUrl} alt={recipe.title} fill style={{ objectFit: 'cover' }} sizes="800px" priority loading="eager" />
         </div>
       )}
 

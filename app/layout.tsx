@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body style={{ minHeight: '100vh', display: 'flex', margin: 0 }}>
         <Sidebar />
-        <main style={{ flex: 1, minWidth: 0, padding: '48px 48px', overflowY: 'auto' }}>
+        <main style={{ flex: 1, minWidth: 0, padding: 'clamp(64px, 5vw, 48px) clamp(20px, 5vw, 48px) 48px', overflowY: 'auto' }}>
           {children}
         </main>
       </body>
