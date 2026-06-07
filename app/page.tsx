@@ -1,3 +1,4 @@
+import { cacheTag } from 'next/cache'
 import { db } from '@/lib/db'
 import { recipes } from '@/lib/schema'
 import { RecipePhotoCard } from '@/components/recipe-photo-card'
@@ -7,6 +8,7 @@ const TIERS: Tier[] = ['S', 'A', 'B', 'C', 'D', 'E']
 
 async function getRecipes() {
   'use cache'
+  cacheTag('recipes')
   return db.select({
     id: recipes.id,
     title: recipes.title,

@@ -1,3 +1,4 @@
+import { cacheTag } from 'next/cache'
 import { db } from '@/lib/db'
 import { recipes } from '@/lib/schema'
 import { desc } from 'drizzle-orm'
@@ -6,6 +7,7 @@ import type { Recipe } from '@/lib/schema'
 
 async function getAllRecipes() {
   'use cache'
+  cacheTag('recipes')
   return db.select({
     id: recipes.id,
     title: recipes.title,
