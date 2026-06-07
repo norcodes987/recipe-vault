@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans, DM_Mono } from 'next/font/google'
+import { Suspense } from 'react'
 import './globals.css'
 import { Sidebar } from '@/components/sidebar'
 
@@ -30,7 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body style={{ minHeight: '100vh', display: 'flex', margin: 0 }}>
-        <Sidebar />
+        <Suspense fallback={null}>
+          <Sidebar />
+        </Suspense>
         <main style={{ flex: 1, minWidth: 0, padding: 'clamp(64px, 5vw, 48px) clamp(20px, 5vw, 48px) 48px', overflowY: 'auto' }}>
           {children}
         </main>
